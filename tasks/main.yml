@@ -13,12 +13,12 @@
       paths: '../vars'
   tags: always
 
-- include: journald.yml
+- include_tasks: journald.yml
   when:
     - docker_log_journald_persit
     - docker_log_driver == "journald"
 
-- include: "{{ ansible_os_family }}.yml"
+- include_tasks: "{{ ansible_os_family }}.yml"
 
 - name: main | Create docker data dir
   file:
@@ -60,7 +60,7 @@
   notify:
     - Restart Docker
 
-- include: proxy.yml
+- include_tasks: proxy.yml
 
 - name: main | Start and enable Docker service
   service:
